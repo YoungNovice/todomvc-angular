@@ -2,10 +2,12 @@
 <section class="todoapp">
   <header class="header">
     <h1>todos</h1>
-    <input (keyup.enter)="addTodo($event)" 
+    <input 
+    (keyup.enter)="addTodo($event)" 
     class="new-todo" placeholder="What needs to be done?" autofocus>
   </header>
-  <ng-template [ngIf]="todos.length">
+  <ng-template 
+  [ngIf]="todos.length">
   <!-- This section should be hidden by default and shown when there are todos -->
   <section class="main">
     <input (change)="toggleAll = $event.target.checked" [checked]="toggleAll" id="toggle-all" class="toggle-all" type="checkbox">
@@ -13,13 +15,18 @@
     <ul class="todo-list">
       <!-- These are here just to show the structure of the list items -->
       <!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-      <li *ngFor="let todo of todos; let i = index;" [ngClass]="{completed: todo.done}">
+      <li 
+      *ngFor="let todo of todos; let i = index;" 
+      [ngClass]="{
+        completed: todo.done,
+        editing: currentEditing === todo
+      }">
         <div class="view">
           <input [(ngModel)]="todo.done" class="toggle" type="checkbox" checked>
-          <label>{{ todo.title }}</label>
+          <label (dblclick)="currentEditing = todo">{{ todo.title }}</label>
           <button (click)="removeTodo(i)" class="destroy"></button>
         </div>
-        <input class="edit" value="Create a TodoMVC template">
+        <input (blur)="currentEditing = null" class="edit" [value]="todo.title">
       </li>
     </ul>
   </section>

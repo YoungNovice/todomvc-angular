@@ -12,7 +12,11 @@ const todos = [
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  // todo列表
   public todos: Array<TodoType> = todos;
+  
+  // 当前正在编辑的li
+  public currentEditing: TodoType = null;
 
   addTodo = (e) :void => {
     if (!e.target.value.length) {
