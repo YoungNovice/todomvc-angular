@@ -60,6 +60,10 @@ export class AppComponent {
       this.currentEditing = null;
     }
   }
+
+  get remainingCount() {
+    return this.todos.filter(t => !t.done).length
+  }
 }
 
 interface TodoType {
