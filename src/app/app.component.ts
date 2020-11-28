@@ -18,6 +18,18 @@ export class AppComponent {
   // 当前正在编辑的li
   public currentEditing: TodoType = null;
 
+  public visibility: string = "completed";
+
+  get filterTodos() {
+    if (this.visibility === 'all') {
+      return this.todos;
+    } else if (this.visibility === 'active') {
+      return this.todos.filter(t => t.done);
+    } else if (this.visibility === 'completed') {
+      return this.todos.filter(t => !t.done);
+    }
+  }
+
   addTodo = (e) :void => {
     if (!e.target.value.length) {
       return;
