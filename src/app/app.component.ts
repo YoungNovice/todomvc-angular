@@ -37,6 +37,11 @@ export class AppComponent {
   set toggleAll (val) {
     this.todos.forEach(t => t.done = val)
   }
+
+  // 删除todo
+  removeTodo(index: number) {
+    this.todos.splice(index, 1);
+  }
 }
 
 interface TodoType {
