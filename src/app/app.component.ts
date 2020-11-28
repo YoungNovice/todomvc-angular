@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 
 const todos = [
@@ -13,7 +14,7 @@ const todos = [
 })
 export class AppComponent {
   // todo列表
-  public todos: Array<TodoType> = todos;
+  public todos: Array<TodoType> = JSON.parse(window.localStorage.getItem('todos') || '[]');
   
   // 当前正在编辑的li
   public currentEditing: TodoType = null;
@@ -23,6 +24,11 @@ export class AppComponent {
   ngOnInit() {
     this.hashChangedHandler();
     window.onhashchange = this.hashChangedHandler.bind(this)
+  }
+
+  // 当angular 组件数据发生改变的时候
+  ngDoCheck() {
+    window.localStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
   hashChangedHandler() {
