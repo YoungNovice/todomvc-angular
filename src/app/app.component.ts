@@ -27,6 +27,16 @@ export class AppComponent {
      e.target.value = '';
      console.log(this.todos)
   }
+
+  // toggleAll属性的get方法
+  get toggleAll () {
+    return this.todos.every(t => t.done)
+  }
+
+  // toggleAll属性的set方法 在对toggleAll属性赋值的时候触发
+  set toggleAll (val) {
+    this.todos.forEach(t => t.done = val)
+  }
 }
 
 interface TodoType {
