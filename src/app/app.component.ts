@@ -20,13 +20,30 @@ export class AppComponent {
 
   public visibility: string = "completed";
 
+  ngOnInit() {
+    window.onhashchange = () => {
+      const hash = window.location.hash.substr(1);
+      switch (hash) {
+        case '/':
+          this.visibility = 'all';
+          break;
+        case '/active':
+          this.visibility = 'active';
+          break;
+        case '/completed':
+          this.visibility = 'completed';
+          break;
+      }
+    }
+  }
+
   get filterTodos() {
     if (this.visibility === 'all') {
       return this.todos;
     } else if (this.visibility === 'active') {
-      return this.todos.filter(t => t.done);
-    } else if (this.visibility === 'completed') {
       return this.todos.filter(t => !t.done);
+    } else if (this.visibility === 'completed') {
+      return this.todos.filter(t => t.done);
     }
   }
 
