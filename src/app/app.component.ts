@@ -46,6 +46,20 @@ export class AppComponent {
   removeTodo(index: number) {
     this.todos.splice(index, 1);
   }
+
+  saveEdit(todo: TodoType, e) {
+    todo.title = e.target.value;
+    this.currentEditing = null;
+  }
+
+  // 取消编辑
+  handleEditKeyUp(e) {
+    const {keyCode, target} = e
+    if (keyCode === 27) {
+      target.value = this.currentEditing.title;
+      this.currentEditing = null;
+    }
+  }
 }
 
 interface TodoType {

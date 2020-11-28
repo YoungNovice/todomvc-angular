@@ -26,7 +26,12 @@
           <label (dblclick)="currentEditing = todo">{{ todo.title }}</label>
           <button (click)="removeTodo(i)" class="destroy"></button>
         </div>
-        <input (blur)="currentEditing = null" class="edit" [value]="todo.title">
+        <input 
+        (keyup)="handleEditKeyUp($event)"
+        (keyup.enter)="saveEdit(todo, $event)"
+        (blur)="saveEdit(todo, $event)" 
+        class="edit" 
+        [value]="todo.title">
       </li>
     </ul>
   </section>
