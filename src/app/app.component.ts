@@ -64,6 +64,10 @@ export class AppComponent {
   get remainingCount() {
     return this.todos.filter(t => !t.done).length
   }
+
+  clearCompleted() {
+    this.todos = this.todos.filter(t => !t.done)
+  }
 }
 
 interface TodoType {
