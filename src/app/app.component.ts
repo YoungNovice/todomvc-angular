@@ -21,7 +21,11 @@ export class AppComponent {
   public visibility: string = "completed";
 
   ngOnInit() {
-    window.onhashchange = () => {
+    this.hashChangedHandler();
+    window.onhashchange = this.hashChangedHandler.bind(this)
+  }
+
+  hashChangedHandler() {
       const hash = window.location.hash.substr(1);
       switch (hash) {
         case '/':
@@ -34,7 +38,6 @@ export class AppComponent {
           this.visibility = 'completed';
           break;
       }
-    }
   }
 
   get filterTodos() {
